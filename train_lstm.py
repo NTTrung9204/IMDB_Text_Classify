@@ -19,9 +19,9 @@ inputs = keras.Input(shape=(maxlen, ), dtype='int32')
 
 x = layers.Embedding(max_features, 128)(inputs)
 
-x = layers.SimpleRNN(64, return_sequences=True)(x)
+x = layers.LSTM(64, return_sequences=True)(x)
 
-x = layers.SimpleRNN(64)(x)
+x = layers.LSTM(64)(x)
 
 outputs = layers.Dense(1, activation='sigmoid')(x)
 
