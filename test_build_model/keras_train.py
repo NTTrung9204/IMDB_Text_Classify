@@ -38,7 +38,7 @@ x_train, x_val, y_train, y_val = train_test_split(X, Y, test_size=0.2)
 
 print(len(x_train))
 
-maxlen = 500
+maxlen = 200
 
 x_train = keras.preprocessing.sequence.pad_sequences(x_train, maxlen=maxlen)
 x_val = keras.preprocessing.sequence.pad_sequences(x_val, maxlen=maxlen)
@@ -59,7 +59,7 @@ model.summary()
 
 model.compile('adam', 'binary_crossentropy', metrics=['accuracy'])
 
-history = model.fit(x_train, y_train, batch_size=512, epochs=1, validation_data=(x_val, y_val))
+history = model.fit(x_train, y_train, batch_size=512, epochs=25, validation_data=(x_val, y_val))
 
 loss_history = history.history['loss']
 val_loss_history = history.history['val_loss']
@@ -78,3 +78,6 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+model_save_path = 'model/keras_model_v1.h5'
+model.save(model_save_path)
