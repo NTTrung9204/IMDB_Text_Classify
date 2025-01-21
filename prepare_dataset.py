@@ -4,7 +4,7 @@ class IMDBDataset(Dataset):
     def __init__(self, features, labels):
         self.features = features
         self.labels = labels
-
+        
     def __len__(self):
         return self.features.size(0)
     
