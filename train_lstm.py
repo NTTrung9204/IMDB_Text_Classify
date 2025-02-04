@@ -3,6 +3,7 @@ from tensorflow import keras
 from tensorflow.keras import layers  # type: ignore
 import tensorflow as tf
 import matplotlib.pyplot as plt
+import pickle
 
 max_features = 20000
 embedding_dim = 128
@@ -43,3 +44,19 @@ plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 
 plt.show()
+
+model.save('sentiment_model_lstm.h5')
+print("Model saved to 'sentiment_model_lstm.h5'")
+
+print("Saving word index...")
+word_index = keras.datasets.imdb.get_word_index()
+
+word_index = {word: (index + 3) for word, index in word_index.items()}
+word_index["<PAD>"] = 0
+word_index["<START>"] = 1
+word_index["<UNK>"] = 2
+word_index["<UNUSED>"] = 3
+
+with open('imdb_word_index.pickle', 'wb') as handle:
+    pickle.dump(word_index, handle, protocol=pickle.HIGHEST_PROTOCOL)
+print("Word index saved to 'imdb_word_index.pickle'")
